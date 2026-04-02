@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>search</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <button class="search-button"> Search </button>
+    <button class="add-button"> + </button>
+    <button class="create-account">Create Account</button>
+</body>
+</html>
+https://github.com/baraasalahbs96/Axsos-assignment/blob/master/Web-Fundemintal/CSS/SearchButton!/index.html
+
+-------
+.search-button {
+    background-color:white;
+    border-radius: 60px 60px;
+    border: 2px solid rgb(13, 226, 191);
+    color: rgb(13, 226, 191);                        
+    padding: 10px 60px;
+    display: block;
+    font-size: 16px;
+    margin:4px 2px;
+}
+.add-button {
+    background-color: rgb(13, 226, 191);
+    border-radius: 50%;
+    border: 2px solid rgb(13, 226, 191);
+    color: white;
+    display: block;
+    font-size: 18px;
+    margin: 4px 2px;
+}
+.create-account {
+    background-color: rgb(8, 161, 221);
+    border: 25px 45px;
+    color: white;
+    box-shadow: 10px 10px black;
+    padding: 15px 32px;
+    font-size: 16px;
+    margin: 4px 2px;
+}
+
+https://github.com/baraasalahbs96/Axsos-assignment/blob/master/Web-Fundemintal/CSS/SearchButton!/index.css

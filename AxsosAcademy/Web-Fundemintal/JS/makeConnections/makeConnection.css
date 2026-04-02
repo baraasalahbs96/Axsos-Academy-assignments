@@ -1,0 +1,130 @@
+* {
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family: Arial, sans-serif;
+}
+body {
+background:#f4f4f4;
+}
+.navbar {
+display: flex;
+justify-content: space-between;
+align-items:center;
+background:#1a1a1a;
+color:white;
+font-size: larger;
+padding: 15px 40px;
+}
+.nav-links {
+display: flex;
+list-style:none;
+gap:25px;
+}
+.btn {
+background:#17a2b8;
+border:none;
+padding:8px 15px;
+color:white;
+font-weight: bold;
+box-shadow: 9px 9px 9px black;
+}
+.container {
+display:flex;
+gap:20px;
+padding: 100px;
+background-color: white;
+}
+.left {
+flex: 2;
+}
+.right {
+flex: 1;
+}
+.profile-card, .education, .requests, .connections {
+background: white;
+border:2px solid #ddd;
+margin-bottom: 30px;
+color: black;
+}
+.profile-card, .education {
+width: 600px;
+/* margin-left: 150px; */
+gap: 60px;
+}
+.requests, .connections {
+width: 400px;
+/* margin-right: 150px; */
+}
+.cover {
+height:90px;
+background:#1da1f2;
+}
+.profile-body {
+padding:20px;
+}
+.profile-body img {
+width:70px;
+border-radius:50%;
+border:5px solid white;
+margin-top:-45px;
+}
+.location {
+color:gray;
+margin:10px 2px;
+}
+.edit {
+color:#065a96;
+}
+.card-header {
+background:#333;
+color:white;
+padding:12px;
+font-weight:bold;
+}
+.card-body {
+padding:15px;
+}
+.date {
+color:gray;
+margin:5px 0px;
+}
+.user1, .user2, .user{
+display:flex;
+align-items:center;
+gap:10px;
+padding:10px;
+border-bottom:1px solid #eee;
+}
+.user1 img, .user2 img, .user img{
+width:35px;
+border-radius:50%;
+}
+.boolians {
+margin-left:auto;
+}
+.accept, .decline {
+width:40px;
+border-radius:50%;
+border:5px solid rgba(255, 255, 255, 0.31);
+margin-top:-45px;
+color: white;
+padding: 5px;
+}
+.total, .two {
+background:#ccc;
+color:black;
+padding: 3px 8px;
+border-radius: 50%;
+margin-right: 10px;
+}
+.view {
+padding:10px;
+color:#065a96;
+}
+
+@media (max-width: 768px) {
+.container {
+flex-direction:column;
+}
+}

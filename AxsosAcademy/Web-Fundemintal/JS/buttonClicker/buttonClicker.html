@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ButtonClicker</title>
+    <link rel="stylesheet" href="buttonClicker.css">
+</head>
+<body>
+<!--  -->
+    <div class="nav">
+        <h1>Dojonary</h1>
+        <input class="search" type="text" placeholder="Search">
+        <button class="login" id="loginBtn" onclick="changeLogin(this)">Login</button>
+    </div>
+<!--  -->
+    <div class="main">
+        <!-- LEFT -->
+        <div class="left">
+            <div class="card">
+                <div class="ninja">
+                    <h2>ninja</h2>
+                    <p><i>noun</i></p>
+                    <p>Plural: ninjas</p>
+                    <button class="likeBtn" onclick="like(this)">13 likes</button>
+                </div>
+                <div class="definition">
+                    <p>A practitioner skilled in the <a href="">Japanese</a> art of <a href="">ninjutsu</a></p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="ninja">
+                    <h2>ninja</h2>
+                    <p><i>noun</i></p>
+                    <p>Plural: ninjas</p>
+                     <button class="likeBtn" onclick="like(this)">37 likes</button>
+                </div>
+                <div class="definition">
+                    <p>A <a href="">programmer</a> who breaks down problems with <a href=""> zen </a>-like focus</p>
+                </div>
+            </div>
+        </div>
+<!--  -->
+        <div class="right">
+            <p>Dojonary is defined by <b>YOU</b></p>
+            <button id="addBtn" onclick="removeBtn(this)">Add Definition</button>
+        </div>
+    </div>
+    <script src="buttonClicker.js"></script>
+</body>
+</html>

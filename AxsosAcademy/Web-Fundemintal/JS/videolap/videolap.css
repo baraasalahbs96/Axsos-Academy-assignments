@@ -1,0 +1,100 @@
+* {
+  font-family: Arial;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #333;
+  color: white;
+  padding: 10px 20px;
+  color: white;
+  border-top: 2px solid purple;
+}
+.navbar input {
+  width: 300px;
+  padding: 5px;
+  border: 2px solid black;
+  color: gray;
+  background-color: white;
+}
+.navbar button {
+  background: purple;
+  color: white;
+  border: 2px solid black;
+  box-shadow: 3px 3px black;
+  padding: 8px 12px;
+}
+.container {
+  display: flex;
+  padding: 20px;
+  background-color: white;
+}
+.video-section {
+  flex: 2;
+}
+h2, p{
+  color: black;
+}
+video {
+  width: 100%;
+  border: 2px solid black;
+}
+.user {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  color: purple;
+}
+.user img{
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin: 10px;
+}
+.subscribe {
+  background: purple;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  position: absolute;
+  right:500px;
+  bottom:30px;
+}
+
+.sidebar {
+  flex: 1;
+  margin-left: 20px;
+}
+h3{
+  color: black;
+  border-bottom: 2px solid black;
+  display: flex;
+  margin-bottom: 10px;;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.item img {
+  width: 70px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+  border: 2px solid purple;
+}
+@media (max-width: 768px) {
+body{
+  background:white;
+  flex-direction: column;
+}
+}
+    

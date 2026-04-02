@@ -1,0 +1,116 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+body{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+nav {
+    background-color: #9fc5f8;
+    color: white;
+    padding: 50px;
+    justify-content: space-between;
+    align-items: center;
+
+}
+.nav-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+nav ul {
+    display: flex;
+    list-style: none;
+}
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    margin-right: 50px;
+    font-size: 20px;
+}
+.content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 50px;
+    border-bottom: 3px solid black;
+    margin-bottom: 30px;
+}
+.content h2 {
+    font-size: 30px
+}
+.weather {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+.card {
+    background-color: #eeeeeeb0;
+    flex: 1;
+    width: 50px;
+    height: auto;
+    text-align: center;
+    padding: 20px 10px;
+    margin: 10px;
+}
+.card img {
+    width: 80px;
+    height: 80px;
+    margin: 15px;
+    border-radius: 50%;
+    background: white;
+}
+.temps {
+    margin: 20px;
+    font-weight: bold;
+    font-size: 20px;
+}
+.high {
+    color: #cc0000;
+}
+.low {
+    color: #0000ff;
+}
+#cookie-bar {
+    position: fixed;
+    bottom: 40px;
+    left: 50px;
+    width: 100%;
+    background-color: white;
+    border: 3px solid black;
+    padding: 30px;
+}
+.cookie-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+.cookie-content img {
+    width: 100px;
+    height: 70px;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+.cookie-text p {
+    font-size: 15px;
+}
+.cookie-button {
+    background-color: #6fa1e3;
+    border: 2px solid #333;
+    padding: 10px 25px;
+    box-shadow: 3px 3px black;
+    cursor: pointer;
+    font-weight: bold;
+}
+@media (max-width: 768px) {
+    body{
+        display: flex;
+        flex-direction: column;
+    }
+}

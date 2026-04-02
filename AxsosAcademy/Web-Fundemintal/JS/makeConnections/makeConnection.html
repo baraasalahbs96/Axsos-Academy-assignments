@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProfilePage</title>
+    <link rel="stylesheet" href="makeConnection.css">
+</head>
+<body>
+    <div class="navbar">
+        <h1 class="logo">Profile</h1>
+        <ul class="nav-links">
+            <li>Home</li>
+            <li>My Profile</li>
+            <li>Find Connections</li>
+        </ul>
+        <button class="btn">Sign Out</button>
+    </div>
+    <div class="container">
+    <div class="left">
+        <div class="profile-card">
+            <div class="cover"></div>
+            <div class="profile-body">
+                <img src="user-circle.png" alt="user-pic">
+                <h2 id="user-name">Jane Doe</h2>
+                <p class="location">📍 Seattle</p>
+                <p> Developer | Engineer | Problem Solver <br> Master of shadows and the Internet!</p>
+                <a href="#" class="edit" onclick="changeName()">⚙ edit profile</a>
+            </div>
+        </div>
+        <div class="education">
+            <div class="card-header">Education</div>
+            <div class="card-body">
+                <h3>Coding Dojo - Full Stack Bootcamp</h3>
+                <p class="date">Dec 2019 - Mar 2020</p>
+                <p> Triple black belt in Python, MERN, and C# </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="right">
+        <div class="requests">
+            <div class="card-header"> <span class="two" id="connection-requests">2</span> Connection Requests </div>
+            <div class="user1">
+                <img src="user-circle.png" alt="user-pic">
+                <p>Todd E</p>
+                <div class="boolians" id="user1">
+                    <button class="accept" onclick="accept('user1')">✔</button>
+                    <button class="decline" onclick="reject('user1')">✖</button>
+            </div>
+        </div>
+        <div class="user2">
+            <img src="user-circle.png" alt="user-pic">
+            <p>Phil K</p>
+            <div class="boolians" id="user2">
+                <button class="accept" onclick="accept('user2')">✔</button>
+                <button class="decline" onclick="reject('user2')">✖</button>
+            </div>
+        </div>
+        </div>
+        <div class="connections">
+            <div class="card-header"> <span class="total" id="your-connections">500</span> Your Connections </div>
+            <div class="user">
+                <img src="user-circle.png" alt="user-pic">
+                <p>Adrien D</p>
+            </div>
+            <div class="user">
+                <img src="user-circle.png" alt="user-pic">
+                <p>Anne J</p>
+            </div>
+            <div class="user">
+                <img src="user-circle.png" alt="user-pic">
+                <p>Alayne T</p>
+            </div>
+            <div class="user">
+                <img src="user-circle.png" alt="user-pic">
+                <p>Arry Y</p>
+            </div>
+                <a class="view">View More</a>
+        </div>
+    </div>
+</div>
+<script src="makeConnection.js"></script>
+</body>
+</html>
