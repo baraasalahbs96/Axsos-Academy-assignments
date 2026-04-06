@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AL-AMeer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <img src="logo.png" alt="Al-AMeer logo">
+            <h1>AL-AMeer <br> we care your <span>car</span></h1>
+        </div>
+        <div class="navlinks">
+            <ul>
+                <li><a href="#"> <span>Home</span></a></li>
+                <li><a href="#">Service</a></li>
+                <li><a href="#">Gallery</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+            <button class="btn">Sign in</button>
+        </div> 
+    </nav>
+            <!-- main -->
+        <div class="main">
+            <div class="description">
+                <h2> Best Car Services <br> in the town</h2>
+                <button onclick="removeBtn(this)" class="btnShow">Show more</button>
+            </div>
+            <div class="image" id="changeBtn">
+                <img src="bluecar.png" alt="blucar pic" id="whoImg">
+            </div>
+        </div>
+        <!-- services -->
+         <div class="main2">
+            <h3> Our Services</h3>
+        <div class="services">
+            <div class="card">
+                <img src="InteriorWashing.png" alt="InteriorWashing pic"> 
+                <div>
+                <p>Interior Washing</p>
+                <button onclick="addLike()" >Book Now</button>
+                </div>
+                <p><span id="likes" > 3 </span> Appointment Available</p>
+            </div>
+
+            <div class="card">
+                <img src="SeatsWashing.png" alt="SeatsWashing pic">
+                <div>
+                <p>Seats Washing</p>
+                <button onclick="addLike()" >Book Now</button>      
+                </div>
+                <p><span id="likes"  > 3 </span> Appointment Available</p>
+            </div>
+
+            <div class="card">
+                <img src="OilChanging.png" accesskey="OilChanging pic">
+                <div><p>Oil changing</p>
+                <button onclick="addLike()" >Book Now</button> 
+                </div>          
+                <p><span id="likes"  > 3 </span> Appointment Available</p>
+            </div>
+
+            <div class="card">
+                <img src="VacuumCleaning.png" alt="vacuumCleaning pic">
+                <div>
+                <p>Vacuum Cleaaning</p>
+                <button onclick="addLike()" >Book Now</button>
+                </div>
+                <p><span  id="likes" > 3 </span> Appointment Available</p>
+            </div>
+            
+            <div class="card">
+                <img src="ExteriorWashing.png" alt="ExteriorWashing pic">
+                <div>
+                <p>Exterior Washing</p>
+                <button onclick="addLike()" >Book Now</button>
+                </div>
+                <p><span  id="likes" > 3 </span> Appointment Available</p>
+            </div>
+
+            <div class="card">
+                <img src="BrakeReparing .png" alt="BrakeReparing pic">
+                <div>
+                <p>Brake Reparing</p>
+                <button onclick="addLike()" >Book Now</button>
+                </div>
+                <p><span  id="likes" > 3 </span> Appointment Available</p>
+            </div>
+         </div>
+        </div>
+            
+         <!-- clients -->
+          <div class="clients">
+            <div class="say">
+                <h4>What our clients say</h4>
+                <div class="border">         
+                    <img id="clientImg"  src="unstisfied.png" alt="client pic">
+                    <p id="clientPara"> My experience at the car wash was disappointing. The cleaning was superficial, and some spots remained on the car even after the wash. The staff were not friendly and seemed unintrested in providing good service. Additinally, the prices were high compared to the quality of service i recieved. i don't think i'll be coming back or recommending this car wash to others.</p>
+                <button id="clientBtn" onclick="changeName()" >Read more</button>
+                <div></div>
+            </div>
+              
+                </div>
+            </div>
+          </div>
+
+    
+    <script src="script.js"></script>
+</body>
+</html>
