@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Checkerboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/checkerboard.css') }}">
+</head>
+<body>
+<h1>Checkerboard {{rows}} x {{cols}}</h1>
+<div class="board">
+    {% for i in range(rows) %}
+        <div class="row">
+            {% for j in range(cols) %}
+                {% if (i + j) % 2 == 0 %}
+                    <div class="square" style="background-color: {{color1}};"></div>
+                {% else %}
+                    <div class="square" style="background-color: {{color2}};"></div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% endfor %}
+</div>
+</body>
+</html>

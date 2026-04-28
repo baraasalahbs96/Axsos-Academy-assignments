@@ -39,7 +39,7 @@ class DoublyLinkedList:
         while current is not None:
             if current.value == val:
                 # حالة: Node وحيدة
-                if current.prev is None and runner.next is None:
+                if current.prev is None and current.next is None:
                     self.head = None
                     self.tail = None
                 # حالة: Node في البداية

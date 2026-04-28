@@ -1,0 +1,17 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Playground</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/playground.css') }}">
+</head>
+<body>
+    <h1>Welcome!</h1>
+    <div class="boxes-container">
+        {% for i in range(num) %}
+            <div class="box" style="background-color: {{ color }};"></div>
+        {% endfor %}
+    </div>
+</body>
+</html>
