@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Champion Survey</title>
+</head>
+<body class="bg-light p-5">
+    <div class="container bg-white p-4 shadow rounded">
+        <h2>Champion Survey</h2>
+        <form action="/result" method="POST">
+            <div class="mb-3">
+                <label>Your Name:</label>
+                <input type="text" name="name" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label>Dojo Location:</label>
+                <select name="location" class="form-select">
+                    <option>San Jose</option>
+                    <option>Seattle</option>
+                    <option>Online</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label>Favorite Language:</label><br>
+                <input type="radio" name="language" value="Python" checked> Python
+                <input type="radio" name="language" value="C#"> C#
+                <input type="radio" name="language" value="JavaScript"> JavaScript
+            </div>
+            <div class="mb-3">
+                <label>Interests (Check all that apply):</label><br>
+                <input type="checkbox" name="interests" value="Coding"> Coding
+                <input type="checkbox" name="interests" value="Design"> Design
+            </div>
+            <div class="mb-3">
+                <label>Comment (optional):</label>
+                <textarea name="comments" class="form-control"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

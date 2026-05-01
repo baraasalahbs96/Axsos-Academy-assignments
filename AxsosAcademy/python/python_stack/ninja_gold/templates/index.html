@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ninja Gold</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .activity-log { height: 200_px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; background: #f8f9fa; }
+        .gold-display { font-size: 1.5rem; font-weight: bold; border: 2px solid #000; padding: 5px 15px; display: inline-block; }
+    </style>
+</head>
+<body class="bg-light">
+    <div class="container py-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <span class="me-3">Your Gold:</span>
+                <div class="gold-display bg-white">{{ session['gold'] }}</div>
+            </div>
+            <div>
+                <span class="badge bg-secondary p-2">Moves: {{ session['moves'] }} / 15</span>
+            </div>
+        </div>
+
+        {% if session['game_over'] %}
+        <div class="alert alert-warning text-center">
+            <h3>{{ session['message'] }}</h3>
+            <a href="/reset" class="btn btn-primary mt-2">Reset Game</a>
+        </div>
+        {% endif %}
+
+        <div class="row g-4 mb-5">
+            <div class="col-md-3">
+                <div class="card text-center h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Farm</h5>
+                        <p class="card-text text-muted">(earns 10-20 golds)</p>
+                        <form action="/process_money" method="post">
+                            <input type="hidden" name="building" value="farm">
+                            <button type="submit" class="btn btn-warning w-100" {% if session['game_over'] %}disabled{% endif %}>Find Gold!</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-center h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Cave</h5>
+                        <p class="card-text text-muted">(earns 5-10 golds)</p>
+                        <form action="/process_money" method="post">
+                            <input type="hidden" name="building" value="cave">
+                            <button type="submit" class="btn btn-warning w-100" {% if session['game_over'] %}disabled{% endif %}>Find Gold!</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-center h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">House</h5>
+                        <p class="card-text text-muted">(earns 2-5 golds)</p>
+                        <form action="/process_money" method="post">
+                            <input type="hidden" name="building" value="house">
+                            <button type="submit" class="btn btn-warning w-100" {% if session['game_over'] %}disabled{% endif %}>Find Gold!</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-center h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Casino</h5>
+                        <p class="card-text text-muted">(earns/takes 0-50 golds)</p>
+                        <form action="/process_money" method="post">
+                            <input type="hidden" name="building" value="casino">
+                            <button type="submit" class="btn btn-warning w-100" {% if session['game_over'] %}disabled{% endif %}>Find Gold!</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h5>Activities:</h5>
+        <div class="activity-log rounded shadow-sm">
+            {% for act in session['activities'] %}
+                <p class="{{ act['class'] }} mb-1">{{ act['text'] }}</p>
+            {% endfor %}
+        </div>
+
+        {% if not session['game_over'] %}
+        <div class="text-end mt-3">
+            <a href="/reset" class="btn btn-outline-danger btn-sm">Reset Game</a>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
