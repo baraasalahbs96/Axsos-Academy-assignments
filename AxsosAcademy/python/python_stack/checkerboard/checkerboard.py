@@ -3,7 +3,7 @@ from flask import Flask, render_template
 app = Flask(__name__)
 
 
-@app.route("/")
+@app.route("/") #an instance of the route decorator, which is used to bind a function to a URL. In this case, it binds the index function to the root URL ("/") of the application.
 def index():
     return render_template("checkerboard.html", rows=8, cols=8, color1="red", color2="black")
 
