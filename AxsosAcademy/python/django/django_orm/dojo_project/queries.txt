@@ -1,0 +1,43 @@
+
+# Import
+from dojo_ninjas_app.models import Dojo, Ninja
+
+# Create 3 dojos
+Dojo.objects.create(name="Dojo Alpha", city="New York", state="NY")
+Dojo.objects.create(name="Dojo Beta", city="Los Angeles", state="CA")
+Dojo.objects.create(name="Dojo Gamma", city="Chicago", state="IL")
+
+# Delete the 3 dojos
+Dojo.objects.all().delete()
+
+# Create 3 more dojos
+Dojo.objects.create(name="Dojo One", city="Austin", state="TX")
+Dojo.objects.create(name="Dojo Two", city="Seattle", state="WA")
+Dojo.objects.create(name="Dojo Three", city="Miami", state="FL")
+
+# Create 3 ninjas for first dojo
+d1 = Dojo.objects.first()
+Ninja.objects.create(dojo=d1, first_name="Ali", last_name="Ahmad")
+Ninja.objects.create(dojo=d1, first_name="Sara", last_name="Khalil")
+Ninja.objects.create(dojo=d1, first_name="Omar", last_name="Hassan")
+
+# Create 3 ninjas for second dojo
+d2 = Dojo.objects.all()[1]
+Ninja.objects.create(dojo=d2, first_name="Lena", last_name="Smith")
+Ninja.objects.create(dojo=d2, first_name="Tom", last_name="Brown")
+Ninja.objects.create(dojo=d2, first_name="Maya", last_name="Jones")
+
+# Create 3 ninjas for third dojo
+d3 = Dojo.objects.last()
+Ninja.objects.create(dojo=d3, first_name="Zaid", last_name="Baker")
+Ninja.objects.create(dojo=d3, first_name="Nora", last_name="White")
+Ninja.objects.create(dojo=d3, first_name="Adam", last_name="Clark")
+
+# Retrieve all ninjas from first dojo
+Ninja.objects.filter(dojo=d1)
+
+# Retrieve all ninjas from last dojo
+Ninja.objects.filter(dojo=d3)
+
+# Retrieve the last ninja's dojo
+Ninja.objects.last().dojo
