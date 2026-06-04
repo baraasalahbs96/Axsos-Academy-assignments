@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Great Number Game</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+</head>
+<body>
+    <h1>Welcome to the Great Number Game!</h1>
+    <p>I am thinking of a number between 1 and 100</p>
+    <p>Take a guess!</p>
+
+    {% if message %}
+        <div class="box {{ result }}">
+            {{ message }}
+            {% if result == 'correct' %}
+                <br><small>You got it in {{ attempts }} attempts!</small>
+                <br><a class="play-again" href="/play_again">Play again!</a>
+            {% endif %}
+        </div>
+    {% endif %}
+
+    {% if result != 'correct' %}
+        <form action="/guess" method="POST">
+            {% csrf_token %}
+            <input type="number" name="guess" min="1" max="100" required>
+            <br>
+            <button type="submit">Submit</button>
+        </form>
+    {% endif %}
+</body>
+</html>

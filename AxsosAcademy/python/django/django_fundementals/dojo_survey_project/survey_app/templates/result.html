@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dojo Survey Result</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'result.css' %}">
+</head>
+<body>
+    <h2>Submitted Info</h2>
+    <div class="box">
+        <p><strong>Name:</strong> {{ name }}</p>
+        <p><strong>Dojo Location:</strong> {{ location }}</p>
+        <p><strong>Favorite Language:</strong> {{ language }}</p>
+        <p><strong>Comment:</strong> {{ comment }}</p>
+    </div>
+    <a href="/">Go Back</a>
+</body>
+</html>

@@ -1,0 +1,47 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: Arial;
+    text-align: center;
+    margin-top: 60px;
+}
+.box {
+    display: inline-block;
+    padding: 30px 50px;
+    margin: 20px;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    border-radius: 8px;
+}
+.low  { background-color: #9b0e0e; }
+.high { background-color: #991010; }
+.correct { background-color: #5aa830; }
+input[type="number"] {
+    padding: 8px;
+    font-size: 18px;
+    width: 120px;
+    text-align: center;
+}
+button {
+    padding: 10px 25px;
+    font-size: 16px;
+    background: #13c89e;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+a.play-again {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 8px 20px;
+    background: #555;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}

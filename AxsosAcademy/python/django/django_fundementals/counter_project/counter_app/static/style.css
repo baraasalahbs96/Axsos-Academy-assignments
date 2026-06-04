@@ -1,0 +1,23 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: Arial;
+    text-align: center;
+    margin-top: 100px;
+}
+h1 { font-size: 48px; }
+p { font-size: 24px; color: #555; }
+a {
+    display: inline-block;
+    margin: 10px;
+    padding: 10px 20px;
+    background: #333;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+a.reset { background: red; }
+a.plus2 { background: green; }

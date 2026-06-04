@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Counter</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <h1>Counter</h1>
+    <p>{{ count }} times.</p>
+
+    <a href="/destroy_session" class="reset">Reset</a>
+    <a href="/increment_two" class="plus2">+2</a>
+</body>
+</html>
