@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Course</title>
+    {% load static %}
+</head>
+<body>
+
+  <h2>Are you sure you want to delete the following course?</h2>
+
+  <p><strong>Name:</strong> {{ course.name }}</p>
+  <p><strong>Description:</strong> {{ course.description }}</p>
+
+  <!-- No — رجوع بدون حذف -->
+  <a href="{% url 'index' %}">
+    <button type="button">No</button>
+  </a>
+
+  <!-- Yes — حذف فعلي -->
+  <form method="POST" action="{% url 'destroy' course.id %}"
+        style="display:inline">
+    {% csrf_token %}
+    <button type="submit"
+            style="background:darkred; color:white">
+      Yes! I want to delete this
+    </button>
+  </form>
+
+</body>
+</html>

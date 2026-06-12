@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Show</title>
+    {% load static %}
+</head>
+<body>
+
+  <a href="{% url 'index' %}">Go Back</a>
+  <h1>Edit Show {{ show.id }}</h1>
+
+  {% if errors %}
+    <ul style="color:red">
+      {% for field, msg in errors.items %}
+        <li>{{ msg }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+  <form method="POST" action="{% url 'update' show.id %}">
+    {% csrf_token %}
+
+    <p>
+      <label>Title</label><br>
+      <input type="text" name="title"
+             value="{{ data.title|default:show.title }}">
+    </p>
+
+    <p>
+      <label>Network</label><br>
+      <input type="text" name="network"
+             value="{{ data.network|default:show.network }}">
+    </p>
+
+    <p>
+      <label>Release Date</label><br>
+      <input type="date" name="release_date"
+             value="{{ data.release_date|default:show.release_date|date:'Y-m-d' }}">
+    </p>
+
+    <p>
+      <label>Description</label><br>
+      <textarea name="description">{{ data.description|default:show.description }}</textarea>
+    </p>
+
+    <button type="submit">Update</button>
+    <a href="{% url 'show' show.id %}">Go to Show</a>
+  </form>
+
+</body>
+</html>

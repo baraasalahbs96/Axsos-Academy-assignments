@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Courses</title>
+    {% load static %}
+</head>
+<body>
+
+  <h2>Add a new course</h2>
+
+  {% if errors %}
+    <ul style="color:red">
+      {% for field, msg in errors.items %}
+        <li>{{ msg }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+  <form method="POST" action="{% url 'create' %}">
+    {% csrf_token %}
+    <p>
+      <label>Name:</label><br>
+      <input type="text" name="name"
+             value="{{ data.name|default:'' }}">
+    </p>
+    <p>
+      <label>Description:</label><br>
+      <textarea name="description">{{ data.description|default:'' }}</textarea>
+    </p>
+    <button type="submit">Add</button>
+  </form>
+
+  <hr>
+
+  <h2>Courses</h2>
+  <table border="1">
+    <tr>
+      <th>Course Name</th>
+      <th>Description</th>
+      <th>Date Added</th>
+      <th>Actions</th>
+    </tr>
+    {% for course in courses %}
+    <tr>
+      <td>{{ course.name }}</td>
+      <td>{{ course.description }}</td>
+      <td>{{ course.created_at|date:"M jS Y g:iA" }}</td>
+      <td>
+        <a href="{% url 'destroy_confirm' course.id %}">remove</a>
+      </td>
+    </tr>
+    {% empty %}
+    <tr>
+      <td colspan="4">No courses yet.</td>
+    </tr>
+    {% endfor %}
+  </table>
+
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Show</title>
+    {% load static %}
+</head>
+<body>
+
+  <a href="{% url 'index' %}">Go Back</a>
+  <h1>Add a New Show</h1>
+
+  {% if errors %}
+    <ul style="color:red">
+      {% for field, msg in errors.items %}
+        <li>{{ msg }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+  <form method="POST" action="{% url 'create' %}">
+    {% csrf_token %}
+
+    <p>
+      <label>Title</label><br>
+      <input type="text" name="title"
+             value="{{ data.title|default:'' }}">
+    </p>
+
+    <p>
+      <label>Network</label><br>
+      <input type="text" name="network"
+             value="{{ data.network|default:'' }}">
+    </p>
+
+    <p>
+      <label>Release Date</label><br>
+      <input type="date" name="release_date"
+             value="{{ data.release_date|default:'' }}">
+    </p>
+
+    <p>
+      <label>Description</label><br>
+      <textarea name="description">{{ data.description|default:'' }}</textarea>
+    </p>
+
+    <button type="submit">Create</button>
+  </form>
+
+</body>
+</html>
