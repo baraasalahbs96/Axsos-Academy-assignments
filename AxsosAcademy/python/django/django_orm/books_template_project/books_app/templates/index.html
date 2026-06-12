@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>Books & Authors</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+
+<div class="container">
+    <div class="forms">
+
+        <!-- Add a Book -->
+        <div class="form-box">
+            <h2>Add a Book</h2>
+            <form action="/create_book/" method="POST">
+                {% csrf_token %}
+                <label>Title:</label>
+                <input type="text" name="title">
+                <label>Description:</label>
+                <textarea name="desc"></textarea>
+                <button type="submit">Add</button>
+            </form>
+        </div>
+
+        <!-- All Books Table -->
+        <div class="table-box">
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Action</th>
+                </tr>
+                {% for book in all_books %}
+                <tr>
+                    <td>{{ book.id }}</td>
+                    <td>{{ book.title }}</td>
+                    <td><a href="/books/{{ book.id }}/">View</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+        <!-- Add an Author -->
+        <div class="form-box">
+            <h2>Add an Author</h2>
+            <form action="/create_author/" method="POST">
+                {% csrf_token %}
+                <label>First Name:</label>
+                <input type="text" name="first_name">
+                <label>Last Name:</label>
+                <input type="text" name="last_name">
+                <label>Notes:</label>
+                <textarea name="notes"></textarea>
+                <button type="submit">Add</button>
+            </form>
+        </div>
+
+        <!-- All Authors Table -->
+        <div class="table-box">
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Action</th>
+                </tr>
+                {% for author in all_authors %}
+                <tr>
+                    <td>{{ author.id }}</td>
+                    <td>{{ author.first_name }} {{ author.last_name }}</td>
+                    <td><a href="/authors/{{ author.id }}/">View</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

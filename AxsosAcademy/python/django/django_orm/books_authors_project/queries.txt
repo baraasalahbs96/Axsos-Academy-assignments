@@ -1,0 +1,58 @@
+From books_authors_app.models import Book, Author
+
+# إنشاء 5 كتب
+Book.objects.create(title='C Sharp', description='')
+Book.objects.create(title='Java', description='')
+Book.objects.create(title='Python', description='')
+Book.objects.create(title='PHP', description='')
+Book.objects.create(title='Ruby', description='')
+
+# إنشاء 5 مؤلفين
+Author.objects.create(first_name='Jane', last_name='Austen')
+Author.objects.create(first_name='Emily', last_name='Dickinson')
+Author.objects.create(first_name='Fyodor', last_name='Dostoevsky')
+Author.objects.create(first_name='William', last_name='Shakespeare')
+Author.objects.create(first_name='Lau', last_name='Tzu')
+
+# تغيير اسم كتاب C Sharp إلى C#
+b1 = Book.objects.get(id=1)
+b1.title = 'C#'
+b1.save()
+
+# تغيير first_name للمؤلف الرابع إلى Bill
+a4 = Author.objects.get(id=4)
+a4.first_name = 'Bill'
+a4.save()
+
+# Assign المؤلف الأول للكتابين الأولين
+a1 = Author.objects.get(id=1)
+a1.books.add(Book.objects.get(id=1), Book.objects.get(id=2))
+
+# Assign المؤلف الثاني للكتب الثلاثة الأولى
+a2 = Author.objects.get(id=2)
+a2.books.add(Book.objects.get(id=1), Book.objects.get(id=2), Book.objects.get(id=3))
+
+# Assign المؤلف الثالث للكتب الأربعة الأولى
+a3 = Author.objects.get(id=3)
+a3.books.add(Book.objects.get(id=1), Book.objects.get(id=2), Book.objects.get(id=3), Book.objects.get(id=4))
+
+# Assign المؤلف الرابع لكل الكتب
+a4.books.add(Book.objects.get(id=1), Book.objects.get(id=2), Book.objects.get(id=3), Book.objects.get(id=4), Book.objects.get(id=5))
+
+# كل المؤلفين للكتاب الثالث
+b3 = Book.objects.get(id=3)
+b3.authors.all()
+
+# حذف المؤلف الأول من الكتاب الثالث
+b3.authors.remove(Author.objects.get(id=1))
+
+# إضافة المؤلف الخامس للكتاب الثاني
+b2 = Book.objects.get(id=2)
+b2.authors.add(Author.objects.get(id=5))
+
+# كل الكتب التي المؤلف الثالث جزء منها
+a3.books.all()
+
+# كل المؤلفين الذين ساهموا في الكتاب الخامس
+b5 = Book.objects.get(id=5)
+b5.authors.all()
