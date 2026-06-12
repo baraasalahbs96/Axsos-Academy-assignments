@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>{{ show.title }}</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+<div class="container">
+    <a href="/shows/">Go Back</a>
+    <h1>{{ show.title }}</h1>
+    <p><strong>Network:</strong> {{ show.network }}</p>
+    <p><strong>Release Date:</strong> {{ show.release_date }}</p>
+    <p><strong>Description:</strong> {{ show.description }}</p>
+    <p><strong>Last Updated:</strong> {{ show.updated_at }}</p>
+    <br>
+    <a href="/shows/{{ show.id }}/edit/">Edit</a> |
+    <form action="/shows/{{ show.id }}/destroy/" method="POST" style="display:inline">
+        {% csrf_token %}
+        <button type="submit">Delete</button>
+    </form>
+</div>
+</body>
+</html>
