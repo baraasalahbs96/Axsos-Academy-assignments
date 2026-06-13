@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Favorite Books</title>   
+    {% load static %}
+</head>
+<body>
+
+<p>Welcome, {{ user.first_name }}! 
+   <a href="/logout/">Log Out</a> | 
+   <a href="/my_books/">My Favorites</a>
+</p>
+
+{% if messages %}
+    {% for msg in messages %}
+        <p style="color:red;">{{ msg }}</p>
+    {% endfor %}
+{% endif %}
+
+<h3>Add a Favorite Book</h3>
+<form action="/books/add/" method="POST">
+    {% csrf_token %}
+    Title: <input type="text" name="title"><br>
+    Description: <textarea name="desc"></textarea><br>
+    <button>Add</button>
+</form>
+
+<hr>
+
+<h3>All Books</h3>
+{% for book in all_books %}
+    <p>
+        <a href="/books/{{ book.id }}/">{{ book.title }}</a>
+        (added by {{ book.uploaded_by.first_name }} {{ book.uploaded_by.last_name }})
+        <br>
+        <!-- NINJA BONUS -->
+        {% if book in my_favs %}
+            <em>this is one of your favorites</em>
+        {% else %}
+            <a href="/books/{{ book.id }}/fav/">Add to Favorites</a>
+        {% endif %}
+    </p>
+{% endfor %}
+
+</body>
+</html>

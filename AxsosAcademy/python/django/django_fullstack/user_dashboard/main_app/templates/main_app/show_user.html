@@ -1,0 +1,50 @@
+{% extends 'main_app/base.html' %}
+{% block content %}
+
+<h2>{{ profile.first_name }} {{ profile.last_name }}</h2>
+<p>Registered at: {{ profile.created_at|date:"F jS Y" }}</p>
+<p>User ID: #{{ profile.id }}</p>
+<p>Email address: {{ profile.email }}</p>
+<p>Description: {{ profile.description }}</p>
+
+<h3>Leave a message for {{ profile.first_name }}</h3>
+<form action="/messages/post/{{ profile.id }}/" method="POST">
+    {% csrf_token %}
+    <textarea name="content" class="form-control" rows="2"></textarea><br>
+    <button class="btn btn-success">Post</button>
+</form>
+
+<hr>
+
+{% for msg in wall_messages %}
+<div style="margin-bottom:20px;">
+    <p>
+        <a href="/users/show/{{ msg.sender.id }}/">{{ msg.sender.first_name }} {{ msg.sender.last_name }}</a>
+        wrote
+        <small class="pull-right">{{ msg.created_at|timesince }} ago</small>
+    </p>
+    <div class="well">{{ msg.content }}</div>
+
+    {% for comment in msg.comments.all %}
+        <div style="margin-left:30px;">
+            <p>
+                <a href="/users/show/{{ comment.user.id }}/">
+                    {{ comment.user.first_name }} {{ comment.user.last_name }}
+                </a>
+                wrote
+                <small class="pull-right">{{ comment.created_at|timesince }} ago</small>
+            </p>
+            <div class="well well-sm">{{ comment.content }}</div>
+        </div>
+    {% endfor %}
+
+    <form action="/comments/post/{{ msg.id }}/" method="POST" style="margin-left:30px;">
+        {% csrf_token %}
+        <input type="text" name="content" placeholder="write a message" class="form-control">
+        <br><button class="btn btn-success btn-sm">Post</button>
+    </form>
+</div>
+<hr>
+{% endfor %}
+
+{% endblock %}

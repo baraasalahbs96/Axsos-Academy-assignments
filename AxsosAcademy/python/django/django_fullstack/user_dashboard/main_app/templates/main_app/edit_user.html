@@ -1,0 +1,57 @@
+{% extends 'main_app/base.html' %}
+{% block content %}
+
+<h2>Edit user #{{ edit_user.id }}
+    <a href="/dashboard/" class="btn btn-primary btn-sm pull-right">Return to Dashboard</a>
+</h2>
+
+<div class="row">
+<div class="col-md-5">
+<fieldset>
+<legend>Edit Information</legend>
+<form action="/users/update/{{ edit_user.id }}/" method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+        <label>Email Address:</label>
+        <input type="email" name="email" value="{{ edit_user.email }}" class="form-control">
+    </div>
+    <div class="form-group">
+        <label>First Name:</label>
+        <input type="text" name="first_name" value="{{ edit_user.first_name }}" class="form-control">
+    </div>
+    <div class="form-group">
+        <label>Last Name:</label>
+        <input type="text" name="last_name" value="{{ edit_user.last_name }}" class="form-control">
+    </div>
+    <div class="form-group">
+        <label>User Level:</label>
+        <select name="user_level" class="form-control">
+            <option value="1" {% if edit_user.user_level == 1 %}selected{% endif %}>Normal</option>
+            <option value="9" {% if edit_user.user_level == 9 %}selected{% endif %}>Admin</option>
+        </select>
+    </div>
+    <button class="btn btn-success">Save</button>
+</form>
+</fieldset>
+</div>
+
+<div class="col-md-5">
+<fieldset>
+<legend>Change Password</legend>
+<form action="/users/update_pw/{{ edit_user.id }}/" method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+        <label>Password:</label>
+        <input type="password" name="password" class="form-control">
+    </div>
+    <div class="form-group">
+        <label>Password Confirmation:</label>
+        <input type="password" name="confirm_pw" class="form-control">
+    </div>
+    <button class="btn btn-success">Update Password</button>
+</form>
+</fieldset>
+</div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ book.title }}</title>
+    {% load static %}
+</head>
+<body>
+
+<p>Welcome, {{ user.first_name }}! <a href="/logout/">Log Out</a></p>
+
+<h2>{{ book.title }}</h2>
+<p>Added by: {{ book.uploaded_by.first_name }} {{ book.uploaded_by.last_name }}</p>
+<p>Added on: {{ book.created_at }}</p>
+<p>Last updated: {{ book.updated_at }}</p>
+<p>Description: {{ book.desc }}</p>
+
+{% if is_owner %}
+    <a href="/books/{{ book.id }}/edit/">Edit</a>
+    <form action="/books/{{ book.id }}/delete/" method="POST" style="display:inline;">
+        {% csrf_token %}
+        <button>Delete</button>
+    </form>
+{% else %}
+    {% if already_liked %}
+        <form action="/books/{{ book.id }}/unfav/" method="POST">
+            {% csrf_token %}
+            <button>Un-Favorite</button>
+        </form>
+    {% else %}
+        <form action="/books/{{ book.id }}/fav/" method="POST">
+            {% csrf_token %}
+            <button>Add to Favorites</button>
+        </form>
+    {% endif %}
+{% endif %}
+
+<h3>Users Who Like This Book:</h3>
+<ul>
+{% for liker in likers %}
+    <li>{{ liker.first_name }} {{ liker.last_name }}</li>
+{% endfor %}
+</ul>
+
+<a href="/books/">Back</a>
+
+</body>
+</html>

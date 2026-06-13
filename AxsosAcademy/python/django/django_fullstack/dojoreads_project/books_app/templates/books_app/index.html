@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Books Home</title>
+    {% load static %}
+</head>
+<body>
+
+<p>
+    Welcome, {{ user.alias }}! |
+    <a href="/books/add/">Add Book and Review</a> |
+    <a href="/logout/">Logout</a>
+</p>
+
+{% if messages %}
+    {% for msg in messages %}
+        <p style="color:red;">{{ msg }}</p>
+    {% endfor %}
+{% endif %}
+
+<div style="display:flex; gap:60px;">
+
+<div>
+<h3>Recent Book Reviews:</h3>
+{% for review in recent_reviews %}
+    <p>
+        <a href="/books/{{ review.book.id }}/"><strong>{{ review.book.title }}</strong></a><br>
+        Rating: {{ review.rating }}/5 ⭐<br>
+        <a href="/users/{{ review.user.id }}/">{{ review.user.alias }}</a> says: {{ review.review }}<br>
+        <small>Posted on {{ review.created_at|date:"N j, Y" }}</small>
+    </p>
+    <hr>
+{% endfor %}
+</div>
+
+<div>
+<h3>Other Books with Reviews:</h3>
+{% for book in other_books %}
+    <p><a href="/books/{{ book.id }}/">{{ book.title }}</a></p>
+{% endfor %}
+</div>
+
+</div>
+
+</body>
+</html>

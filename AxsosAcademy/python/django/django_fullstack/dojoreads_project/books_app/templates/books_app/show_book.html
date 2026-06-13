@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ book.title }}</title>
+    {% load static %}
+</head>
+<body>
+
+<p><a href="/books/">Home</a> | <a href="/logout/">Logout</a></p>
+
+<h2>{{ book.title }}</h2>
+<p>Author: {{ book.author.name }}</p>
+
+<div style="display:flex; gap:60px;">
+
+<div>
+<h3>Reviews:</h3>
+{% for review in reviews %}
+    <p>
+        Rating: {{ review.rating }}/5 ⭐<br>
+        <a href="/users/{{ review.user.id }}/">{{ review.user.alias }}</a>
+        says: {{ review.review }}<br>
+        <small>Posted on {{ review.created_at|date:"N j, Y" }}</small><br>
+        {% if review.user.id == request.session.user_id %}
+            <form action="/reviews/{{ review.id }}/delete/" method="POST" style="display:inline;">
+                {% csrf_token %}
+                <button style="color:red;">Delete this Review</button>
+            </form>
+        {% endif %}
+    </p>
+    <hr>
+{% endfor %}
+</div>
+
+<div>
+<h3>Add a Review:</h3>
+<form action="/books/{{ book.id }}/review/" method="POST">
+    {% csrf_token %}
+    <textarea name="review" placeholder="Your review..."></textarea><br>
+    Rating:
+    <select name="rating">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3" selected>3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+    </select> stars<br>
+    <button>Submit Review</button>
+</form>
+</div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>The Wall</title>
+    {% load static %}
+</head>
+<body>
+    <h2>CodingDojo Wall</h2>
+    <p>Welcome {{ user.first_name }} | <a href="/logout/">Log Out</a></p>
+
+    {% if messages %}
+        {% for msg in messages %}
+            <p style="color:red;">{{ msg }}</p>
+        {% endfor %}
+    {% endif %}
+
+    <!-- Post a Message -->
+    <h3>Create a message</h3>
+    <form action="/post_message/" method="POST">
+        {% csrf_token %}
+        <input type="text" name="message" style="width:400px;">
+        <button type="submit">Create a message</button>
+    </form>
+
+    <hr>
+
+    <!-- All Messages (newest first) -->
+    {% for msg in all_messages %}
+        <div style="margin-bottom:20px;">
+            <strong>{{ msg.user.first_name }} {{ msg.user.last_name }}</strong>
+            - {{ msg.created_at|date:"F jS Y" }}
+            <p style="margin-left:20px;">{{ msg.message }}</p>
+
+            <!-- Delete button (only owner, within 30 min) -->
+            {% if msg.user.id == request.session.user_id %}
+                <form action="/delete/{{ msg.id }}/" method="POST" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit">Delete</button>
+                </form>
+            {% endif %}
+
+            <!-- Comments (oldest first) -->
+            {% for comment in msg.comments.all %}
+                <div style="margin-left:40px;">
+                    <strong>{{ comment.user.first_name }} {{ comment.user.last_name }}</strong>
+                    - {{ comment.created_at|date:"F jS Y" }}
+                    <p>{{ comment.comment }}</p>
+                </div>
+            {% endfor %}
+
+            <!-- Post a Comment -->
+            <form action="/post_comment/{{ msg.id }}/" method="POST" style="margin-left:20px;">
+                {% csrf_token %}
+                <input type="text" name="comment" placeholder="Post a comment" style="width:350px;">
+                <button type="submit">Add a comment</button>
+            </form>
+        </div>
+        <hr>
+    {% endfor %}
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Book</title>
+    {% load static %}
+</head>
+<body>
+
+{% if messages %}
+    {% for msg in messages %}
+        <p style="color:red;">{{ msg }}</p>
+    {% endfor %}
+{% endif %}
+
+<h2>Edit Book</h2>
+<form action="/books/{{ book.id }}/update/" method="POST">
+    {% csrf_token %}
+    Title: <input type="text" name="title" value="{{ book.title }}"><br>
+    Description: <textarea name="desc">{{ book.desc }}</textarea><br>
+    <button>Update</button>
+</form>
+
+<a href="/books/{{ book.id }}/">Cancel</a>
+
+</body>
+</html>

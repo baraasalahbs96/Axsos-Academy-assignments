@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Favorite Books</title>
+    {% load static %}
+</head>
+<body>
+
+<p>Welcome, {{ user.first_name }}! <a href="/logout/">Log Out</a></p>
+
+<h2>My Favorite Books</h2>
+{% for book in fav_books %}
+    <p><a href="/books/{{ book.id }}/">{{ book.title }}</a></p>
+{% empty %}
+    <p>No favorites yet.</p>
+{% endfor %}
+
+<a href="/books/">Back to All Books</a>
+
+</body>
+</html>
