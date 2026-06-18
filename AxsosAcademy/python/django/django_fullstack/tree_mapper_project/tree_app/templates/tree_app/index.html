@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tree Mapper</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Tree Mapper</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <div class=" panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Register</h3>
+                    </div>
+                    <div class="panel-body">
+                        {% with reg_errors=messages %}
+                        {% endwith %}
+
+                        {% if messages %}
+                        <div class="error-box">
+                            <ul>
+                                {% for msg in messages %}
+                                    {% if 'register' in msg.extra_tags %}
+                                        <li>{{ msg }}</li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        {% endif %}
+        <form action="/register" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label>First name </label>
+                <input type="text" name="first_name" placeholder="first name">
+            </div>
+            <div class="form-group">
+                <label>Last name </label>
+                <input type="text" name="last_name" placeholder="last name">
+            </div>
+            <div class="form-group">
+                <label>Email </label>
+                <input type="email" name="email" placeholder="example@email.com">
+            </div>
+            <div class="form-group">
+                <label>Password </label>
+                <input type="password" name="password" placeholder="at least 8 characters">
+            </div>
+            <div class="form-group">
+                <label>Confirm Password </label>
+                <input type="password" name="confirm_pw" placeholder="try to type the password again">
+            </div>
+            <button type="submit" class="btn-register">submit</button>
+        </form>
+                    <div class="col-md-6">
+                        <div class=" panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Log in</h3>
+                            </div>
+                            <div class="panel-body">
+                                {% if messages %}
+                                <div class="error-box">
+                                    <ul>
+                                        {% for msg in messages %}
+                                            {% if 'login' in msg.extra_tags %}
+                                            <li>{{ msg }}</li>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                                {% endif %}
+                                
+                                <form method="post" action="{% url 'login' %}">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        <label> Email: </label>
+                                        <input type="email" name="email" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label> Password: </label>
+                                        <input type="password" name="password" class="form-control">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+{% extends "tree_app/base.html" %}
+{% block content %}
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>Tree Mapper</h2>
+        <p class="tagline">Find, share and learn about trees!</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4>Mapped Trees</h4>
+                <a href="{% url 'new_tree' %}" >+ Post a new tree on the map</a>
+            </div>
+
+            <div class="panel-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Species</th>
+                            <th>View</th>
+                            <th>Mapped By</th>
+                            <th>Zip Code</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for tree in trees %}
+                        <tr>
+                            <td>
+                                {{ tree.species }}
+                                {% if tree.mapped_by.id == user.id %}
+                                    <a href="{% url 'edit_tree' tree.id %}">Edit</a> | 
+                                    <a href="{% url 'delete_tree' tree.id %}" onclick="return confirm('Delete this tree?')">Delete</a>
+                                    {% endif %}
+                            </td>
+                            <td><a href="{% url 'view_tree' tree.id %}">View</a></td>
+                            <td>{{ tree.mapped_by.full_name }}</td>
+                            <td>
+                                {% if tree.zip_code %}
+                                <a href="{% url 'trees_by_zip' tree.zip_code %}" class="zip-link">{{ tree.zip_code }}</a>
+                                {% else %}{% endif %}
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="4" class="text-center text-muted">No trees posted yet. Be the first!</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

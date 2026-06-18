@@ -1,0 +1,48 @@
+{% extends "tree_app/base.html" %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-7">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4>Edit Tree Details</h4>
+                </div>
+                <div class="panel-body">
+                    {% if messages %}
+                    <div>
+                        <ul >
+                            {% for msg in messages %}
+                            <li>{{ msg }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% endif %}
+                    <p> Date must not be blank</p>
+                    <form method="post" action="{% url 'update_tree' tree.id %}">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label> Species</label>
+                            <input type="text" name="species" class="form-control" value="{{ tree.species }}"> 
+                            </div>
+                            <div class="form-group">
+                            <label> Location</label>
+                            <input type="text" name="location" class="form-control" value="{{ tree.location }}"> 
+                            </div>
+                            <div class="form-group">
+                            <label> Data Found</label>
+                            <input type="date" name="data_found" class="form-control" value="{{ tree.data_found }}" | date:"Y-m-d"> 
+                            </div>
+                            <div class="form-group">
+                            <label> Zip code</label>
+                            <input type="text" name="zip_code" class="form-control" maxlength="5" value="{{ tree.zip_code }} maxlength="5"> 
+                            </div>
+                            <div class="form-group">
+                            <label> Notes</label>
+                            <textarea name="notes" class="form-control">{{ tree.notes }}</textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary"> Update </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

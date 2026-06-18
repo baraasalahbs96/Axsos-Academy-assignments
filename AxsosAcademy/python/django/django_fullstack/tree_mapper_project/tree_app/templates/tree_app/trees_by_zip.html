@@ -1,0 +1,30 @@
+{% extends "tree_app/base.html" %}
+{% block content %}
+ <div class="row">
+        <div class="col-md-10">
+            <h2>Tree Mapper</h2>
+            <p> Find, share and learn about real trees!</p>
+
+            <h3> Trees in Zip Code {{ zip_code }}</h3>
+            <table class="table table-bordered">\
+                <thead>
+                    <tr>
+                        <th>Species</th>
+                        <th>Data Seen</th>
+                        <th>Location</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for tree in trees %}
+                    <tr>
+                        <td><a href="{% url 'tree_detail' tree.id %}">{{ tree.species }}</a></td>
+                        <td>{{ tree.data_found}}</td>
+                        <td>{{ tree.location }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    </div>  
+    {% endblock %}

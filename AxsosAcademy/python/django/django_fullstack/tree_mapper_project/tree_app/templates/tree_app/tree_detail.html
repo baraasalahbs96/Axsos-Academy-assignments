@@ -1,0 +1,37 @@
+{% extends "tree_app/base.html" %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-8">
+            <h2>Tree Mapper</h2>
+            <p>Find, share and learn about real trees!</p>
+
+            <h3> {{ tree.species }} <small> added by {{tree.mapped_by.full_name}}</small></h3>
+            <p> Where: {{ tree.location }}</p>
+            <p> When: {{ tree.data_found | date:"M d, Y" }}</p>
+            <p> Notes: {{ tree.notes | default:"No notes provided"}}</p>
+
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <strong> Visited By: </strong>
+                </div>
+                <div class="panel-body">
+                    {% if tree.visitors.all%}
+                    <ul>
+                        {% for visitor in tree.visitors.all %}
+                        <li>{{ visitor.full_name }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                    <p class="text-muted">No visitors yet.</p>
+                    {% endif %}
+
+                    {% if not already_visited %}
+                    <a href="{% url 'visit_tree' tree.id %}" class="btn btn-default btn-sm">Did you visit this tree?</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

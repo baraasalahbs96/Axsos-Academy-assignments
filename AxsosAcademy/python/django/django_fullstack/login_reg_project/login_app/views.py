@@ -9,9 +9,7 @@ def index(request):
 def register(request):
     if request.method != 'POST':
         return redirect('index')
-    
     errors = User.objects.register_validator(request.POST)
-    
     if errors:
         for key, msg in errors.items():
             messages.error(request, msg)
