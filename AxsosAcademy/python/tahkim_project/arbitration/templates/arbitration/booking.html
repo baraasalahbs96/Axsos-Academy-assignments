@@ -1,0 +1,39 @@
+{% extends "arbitration/base.html" %}
+{% block title %}{{ T.booking_page_title }}{% endblock %}
+{% block content %}
+<div class="panel">
+  <h2>{{ T.booking_page_title }}</h2>
+  <p style="color:var(--ink-soft);line-height:1.8;">{{ T.booking_intro }}</p>
+
+  <div class="method-choice">
+    <div class="method-card selected" id="mWhatsapp">
+      <div class="icon">💬</div>
+      <h3>{{ T.method_whatsapp_title }}</h3>
+      <p style="font-size:.85rem;color:var(--ink-soft);">{{ T.method_whatsapp_desc }}</p>
+    </div>
+    <div class="method-card" id="mSite">
+      <div class="icon">🗓️</div>
+      <h3>{{ T.method_site_title }}</h3>
+      <p style="font-size:.85rem;color:var(--ink-soft);">{{ T.method_site_desc }}</p>
+    </div>
+  </div>
+
+  <div id="whatsappArea">
+    <div class="note">{{ T.whatsapp_note }}</div>
+    <a class="btn olive" style="margin-top:14px;" target="_blank"
+       href="https://wa.me/{{ WHATSAPP_NUMBER }}?text=السلام%20عليكم،%20أرغب%20بحجز%20جلسة%20تحكيم.">{{ T.whatsapp_open }}</a>
+  </div>
+
+  <div id="siteArea" style="display:none;">
+    <form method="post" novalidate>
+      {% csrf_token %}
+      {% for field in form %}
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+        {{ field }}
+        {% if field.errors %}<ul class="errorlist">{% for e in field.errors %}<li>{{ e }}</li>{% endfor %}</ul>{% endif %}
+      {% endfor %}
+      <button type="submit" class="btn">{{ T.booking_confirm_btn }}</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

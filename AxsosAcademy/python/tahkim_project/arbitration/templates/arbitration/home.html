@@ -1,0 +1,26 @@
+{% extends "arbitration/base.html" %}
+{% block title %}{{ T.site_name }} — {{ T.nav_home }}{% endblock %}
+{% block content %}
+  <div class="hero">
+    <h1>{{ T.hero_title }}</h1>
+    <p class="lede">{{ T.hero_lede }}</p>
+  </div>
+  {% include "arbitration/_olive_divider.html" %}
+  <div class="card-grid">
+    <a class="nav-card" href="{% url 'ask_case' %}">
+      <span class="icon">⚖️</span>
+      <h3>{{ T.card_ask_title }}</h3>
+      <p>{{ T.card_ask_desc }}</p>
+    </a>
+    <a class="nav-card" href="{% url 'qa_list' %}">
+      <span class="icon">📖</span>
+      <h3>{{ T.card_qa_title }}</h3>
+      <p>{{ T.card_qa_desc }}</p>
+    </a>
+    <a class="nav-card" href="{% url 'booking' %}">
+      <span class="icon">📅</span>
+      <h3>{{ T.card_booking_title }}</h3>
+      <p>{{ T.card_booking_desc }}</p>
+    </a>
+  </div>
+{% endblock %}

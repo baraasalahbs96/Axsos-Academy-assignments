@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="edit-game-panel">
+    <form method="post">
+        {% csrf_token %}
+        <div class="field">
+            <label>Game name</label>
+            {{ form.name }}
+            <span class="error">{{ form.name.errors|first }}</span>
+        </div>
+        <div class="field">
+            <label>Genre</label>
+            {{ form.genre }}
+        </div>
+        <div class="field">
+            <label>Release Date</label>
+            {{ form.release_date }}
+            <span class="error">{{ form.release_date.errors|first }}</span>
+        </div>
+        <div class="field">
+            <label>Description</label>
+            {{ form.description }}
+            <span class="error">{{ form.description.errors|first }}</span>
+        </div>
+        <div class="button-row">
+            <button type="submit" class="btn-primary">Apply</button>
+            <button type="submit" name="cancel" class="btn-secondary">Cancel</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

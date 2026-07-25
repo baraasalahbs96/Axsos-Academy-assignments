@@ -1,0 +1,70 @@
+{% extends "arbitration/base.html" %}
+{% load i18n_extras %}
+{% block title %}{{ T.confirm_page_title }}{% endblock %}
+{% block content %}
+<div class="panel">
+  <h2>{{ T.confirm_page_title }}</h2>
+  <div class="confirm-box">
+    <div class="row"><span>{{ T.confirm_name }}</span><strong>{{ booking.name }}</strong></div>
+    <div class="row"><span>{{ T.confirm_topic }}</span><strong>{{ booking.topic }}</strong></div>
+    <div class="row"><span>{{ T.confirm_date }}</span><strong>{{ booking.date }}</strong></div>
+    <div class="row"><span>{{ T.confirm_time }}</span><strong>{{ booking.time }}</strong></div>
+    <div class="row"><span>{{ T.confirm_status }}</span><strong>{% status_label booking.get_status_display %}</strong></div>
+    <div class="row"><span>{{ T.confirm_payment }}</span><strong>{% if booking.paid %}{{ T.confirm_paid }}{% else %}{{ T.confirm_unpaid }}{% endif %}</strong></div>
+  </div>
+
+  <p style="margin-top:18px;font-weight:600;color:var(--wood-warm);">{{ T.confirm_link_label }}</p>
+  <div class="link-box" id="confirmLink">{{ confirm_url }}</div>
+  <button type="button" class="btn small ghost" onclick="copyConfirmLink(this, '{{ confirm_url }}')">{{ T.copy_link }}</button>
+
+  <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:16px;">
+    <a class="btn ghost" target="_blank"
+       href="https://wa.me/{{ WHATSAPP_NUMBER }}?text=السلام%20عليكم،%20أرغب%20بتأكيد%20الحجز%20رقم%20{{ booking.pk }}%20بتاريخ%20{{ booking.date }}%20الساعة%20{{ booking.time }}">{{ T.confirm_via_whatsapp }}</a>
+    <a class="btn ghost" href="tel:+{{ WHATSAPP_NUMBER }}">{{ T.confirm_via_phone }}</a>
+
+    {% if not booking.paid %}
+      <a class="btn olive" target="_blank"
+         href="https://wa.me/{{ WHATSAPP_NUMBER }}?text=السلام%20عليكم،%20أرغب%20بدفع%20رسوم%20جلسة%20التحكيم%20رقم%20{{ booking.pk }}">{{ T.pay_via_whatsapp }}</a>
+      {% if STRIPE_PAYMENT_LINK %}
+        <a class="btn" target="_blank" href="{{ STRIPE_PAYMENT_LINK }}?client_reference_id={{ booking.pk }}">{{ T.pay_online }}</a>
+      {% endif %}
+      {% if not STRIPE_PAYMENT_LINK and not PAYPAL_CLIENT_ID and not PAYPAL_LINK %}
+        <button class="btn" disabled title="{{ T.pay_online_soon }}">{{ T.pay_online_soon }}</button>
+      {% endif %}
+    {% endif %}
+  </div>
+
+  {% if not booking.paid and PAYPAL_CLIENT_ID %}
+    <div id="paypal-button-container" style="max-width:320px;margin-top:16px;"></div>
+    <script src="https://www.paypal.com/sdk/js?client-id={{ PAYPAL_CLIENT_ID }}&currency={{ PAYPAL_CURRENCY }}"></script>
+    <script>
+      function getCookie(name) {
+        const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+        return match ? match[2] : null;
+      }
+      paypal.Buttons({
+        createOrder: function() {
+          return fetch("{% url 'paypal_create_order' booking.pk %}", {
+            method: "POST",
+            headers: {"X-CSRFToken": getCookie("csrftoken")}
+          }).then(res => res.json()).then(data => data.id);
+        },
+        onApprove: function(data) {
+          return fetch("/paypal/capture-order/" + data.orderID + "/", {
+            method: "POST",
+            headers: {"X-CSRFToken": getCookie("csrftoken")}
+          }).then(res => res.json()).then(function() {
+            location.reload();
+          });
+        }
+      }).render('#paypal-button-container');
+    </script>
+  {% elif not booking.paid and PAYPAL_LINK %}
+    <div style="margin-top:16px;">
+      <a class="btn" target="_blank" href="{{ PAYPAL_LINK }}" title="رقم الحجز: {{ booking.pk }}">{{ T.pay_paypal }}</a>
+    </div>
+  {% endif %}
+
+  <div class="note">{{ T.confirm_note }}</div>
+</div>
+{% endblock %}

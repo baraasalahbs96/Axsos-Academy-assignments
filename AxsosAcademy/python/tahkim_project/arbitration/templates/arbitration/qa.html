@@ -1,0 +1,20 @@
+{% extends "arbitration/base.html" %}
+{% load i18n_extras %}
+{% block title %}{{ T.qa_page_title }}{% endblock %}
+{% block content %}
+<div class="panel">
+  <h2>{{ T.qa_page_title }}</h2>
+  {% if cases %}
+    {% for c in cases %}
+      <div class="qa-item">
+        <span class="qa-tag">{% category_label c.category %}</span>
+        <div class="qa-q">{{ c.question }}</div>
+        <div class="qa-a">{{ c.answer }}</div>
+        <div class="qa-meta">{{ T.qa_answered_on }} {{ c.answered_at|date:"j F Y" }}</div>
+      </div>
+    {% endfor %}
+  {% else %}
+    <div class="empty">{{ T.qa_empty }}</div>
+  {% endif %}
+</div>
+{% endblock %}

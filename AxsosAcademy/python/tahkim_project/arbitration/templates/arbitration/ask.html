@@ -1,0 +1,17 @@
+{% extends "arbitration/base.html" %}
+{% block title %}{{ T.ask_page_title }}{% endblock %}
+{% block content %}
+<div class="panel">
+  <h2>{{ T.ask_page_title }}</h2>
+  <form method="post" novalidate>
+    {% csrf_token %}
+    {% for field in form %}
+      <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+      {{ field }}
+      {% if field.errors %}<ul class="errorlist">{% for e in field.errors %}<li>{{ e }}</li>{% endfor %}</ul>{% endif %}
+    {% endfor %}
+    <button type="submit" class="btn">{{ T.ask_submit }}</button>
+  </form>
+  <div class="note">{{ T.ask_note }}</div>
+</div>
+{% endblock %}

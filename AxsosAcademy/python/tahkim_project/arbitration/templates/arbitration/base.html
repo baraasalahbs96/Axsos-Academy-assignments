@@ -1,0 +1,79 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="{{ current_lang }}" dir="{% if current_lang == 'en' %}ltr{% else %}rtl{% endif %}">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}{{ T.site_name }}{% endblock %}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'arbitration/css/style.css' %}">
+</head>
+<body>
+
+<div class="utility-bar">
+  <div class="utility-inner">
+    <span id="liveClock" class="live-clock"></span>
+    <div class="utility-actions">
+      {% if current_lang == 'ar' %}
+        <a class="lang-switch" href="{% url 'set_language' 'en' %}">{{ T.language_switch }}</a>
+      {% else %}
+        <a class="lang-switch" href="{% url 'set_language' 'ar' %}">{{ T.language_switch }}</a>
+      {% endif %}
+      <button type="button" class="icon-btn" id="darkModeBtn" title="{{ T.dark_mode }}" aria-label="{{ T.dark_mode }}">🌙</button>
+      <div class="a11y-wrapper">
+        <button type="button" class="icon-btn" id="a11yBtn" title="{{ T.accessibility }}" aria-label="{{ T.accessibility }}">♿</button>
+        <div class="a11y-panel" id="a11yPanel">
+          <button type="button" onclick="increaseFont()">A+ {{ T.font_increase }}</button>
+          <button type="button" onclick="decreaseFont()">A- {{ T.font_decrease }}</button>
+          <button type="button" onclick="toggleContrast()">◐ {{ T.high_contrast }}</button>
+          <button type="button" onclick="resetAccessibility()">↺ {{ T.reset_accessibility }}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="brand">
+    <svg class="mark" viewBox="0 0 40 40" fill="none">
+      <path d="M20 4C20 4 12 10 12 18C12 24 16 27 20 27C24 27 28 24 28 18C28 10 20 4 20 4Z" fill="#9CA772" stroke="#FFFDF9" stroke-width="1.2"/>
+      <line x1="20" y1="27" x2="20" y2="36" stroke="#9CA772" stroke-width="2"/>
+    </svg>
+    <span class="name">{{ T.site_name }}</span>
+  </div>
+  <nav class="main-nav">
+    <a href="{% url 'home' %}" class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">{{ T.nav_home }}</a>
+    <a href="{% url 'ask_case' %}" class="{% if request.resolver_match.url_name == 'ask_case' %}active{% endif %}">{{ T.nav_ask }}</a>
+    <a href="{% url 'qa_list' %}" class="{% if request.resolver_match.url_name == 'qa_list' %}active{% endif %}">{{ T.nav_qa }}</a>
+    <a href="{% url 'booking' %}" class="{% if request.resolver_match.url_name == 'booking' %}active{% endif %}">{{ T.nav_booking }}</a>
+  </nav>
+</header>
+
+<main>
+  {% if messages %}
+    {% for message in messages %}
+      <div class="note">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+  {% block content %}{% endblock %}
+</main>
+
+<footer>
+  © {{ T.site_name }} — <a href="/admin/">{{ T.footer_admin }}</a>
+</footer>
+
+<!-- دائرة التواصل العائمة: تبقى ظاهرة وتتحرك مع الصفحة بكل مكان -->
+<div class="contact-fab-wrapper">
+  <div class="contact-panel" id="contactPanel">
+    <div class="contact-panel-title">{{ T.contact_us }}</div>
+    <a href="tel:{{ CONTACT_PHONE }}">📞 {{ T.call_us }}</a>
+    <a href="mailto:{{ CONTACT_EMAIL }}">✉️ {{ T.email_us }}</a>
+    <a target="_blank" href="https://wa.me/{{ WHATSAPP_NUMBER }}">💬 {{ T.whatsapp_us }}</a>
+  </div>
+  <button type="button" class="contact-fab" id="contactFabBtn" aria-label="{{ T.contact_us }}">✆</button>
+</div>
+
+<script src="{% static 'arbitration/js/main.js' %}"></script>
+</body>
+</html>

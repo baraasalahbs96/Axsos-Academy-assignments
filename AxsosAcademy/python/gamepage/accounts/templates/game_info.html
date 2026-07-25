@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="game-info-wrapper">
+    <div class="game-details">
+        <p><strong>Game name:</strong> {{ game.name }}</p>
+        <p><strong>Genre:</strong> {{ game.get_genre_display }}</p>
+        <p><strong>Description:</strong> {{ game.description }}</p>
+
+        {% if is_owner %}
+        <p><strong>created By:</strong> {{ game.created_by.get_full_name }}</p>
+        <div class="button-row">
+            <a href="{% url 'edit_game' game.pk %}" class="btn-secondary">Edit</a>
+            <form method="post" action="{% url 'delete_game' game.pk %}" class="inline-form" onsubmit="return confirmDelete();">
+                {% csrf_token %}
+                <button type="submit" class="btn-secondary">Delete</button>
+            </form>
+        </div>
+        {% else %}
+        <div class="button-row">
+            <form method="post" action="{% url 'add_to_fav' game.pk %}" class="inline-form">
+                {% csrf_token %}
+                <button type="submit" class="btn-primary">
+                    {% if is_fav %}Added to Fav{% else %}Add To Fav{% endif %}
+                </button>
+            </form>
+            <form method="post" action="{% url 'rate_game' game.pk %}" class="inline-form rate-form">
+                {% csrf_token %}
+                <select name="rate_value">
+                    {% for i in "12345" %}
+                    <option value="{{ i }}" {% if my_rating.rate|stringformat:"s" == i %}selected{% endif %}>{{ i }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit" class="btn-secondary">Rate</button>
+            </form>
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="ratings-panel">
+        <p class="ratings-title">The players who like this game the most</p>
+        <table class="ratings-table">
+            <thead>
+                <tr>
+                    <th><a href="?sort=id&dir={% if sort == 'id' %}{{ next_dir }}{% else %}asc{% endif %}">ID ◇</a></th>
+                    <th><a href="?sort=name&dir={% if sort == 'name' %}{{ next_dir }}{% else %}asc{% endif %}">Player name ◇</a></th>
+                    <th>Rate</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for r in ratings %}
+                <tr>
+                    <td>{{ r.user.id }}</td>
+                    <td><a href="{% url 'profile' r.user.id %}">{{ r.user.get_full_name }}</a></td>
+                    <td>{{ r.rate }}</td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="3">No ratings yet</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

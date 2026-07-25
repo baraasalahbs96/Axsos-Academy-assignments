@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GamePage</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="browser-frame">
+        {% block topbar %}
+        <div class="topbar">
+            {% if user.is_authenticated %}
+            <div class="user-info">
+                <span class="avatar-icon">👤</span>
+                <h2>Welcome {{ user.first_name }} {{ user.last_name }}</h2>
+            </div>
+            <a href="{% url 'logout' %}" class="logout-link">Logout</a>
+            {% endif %}
+        </div>
+        {% endblock %}
+
+        {% if messages %}
+        <ul class="messages">
+            {% for m in messages %}<li>{{ m }}</li>{% endfor %}
+        </ul>
+        {% endif %}
+
+        {% block content %}{% endblock %}
+    </div>
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

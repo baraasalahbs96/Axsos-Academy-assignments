@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="dashboard-wrapper">
+    <div class="create-game-panel">
+        <form method="post">
+            {% csrf_token %}
+            <div class="field">
+                <label>Game name</label>
+                {{ form.name }}
+                <span class="error">{{ form.name.errors|first }}</span>
+            </div>
+            <div class="field">
+                <label>Genre</label>
+                {{ form.genre }}
+            </div>
+            <div class="field">
+                <label>Release Date</label>
+                {{ form.release_date }}
+                <span class="error">{{ form.release_date.errors|first }}</span>
+            </div>
+            <div class="field">
+                <label>Description</label>
+                {{ form.description }}
+                <span class="error">{{ form.description.errors|first }}</span>
+            </div>
+            <button type="submit" class="btn-primary">Create a Game</button>
+        </form>
+    </div>
+
+    <table class="games-table">
+        <thead>
+            <tr>
+                <th><a href="?sort=name&dir={% if sort == 'name' %}{{ next_dir }}{% else %}asc{% endif %}">Game ◇</a></th>
+                <th><a href="?sort=genre&dir={% if sort == 'genre' %}{{ next_dir }}{% else %}asc{% endif %}">Genre ◇</a></th>
+                <th><a href="?sort=release_date&dir={% if sort == 'release_date' %}{{ next_dir }}{% else %}asc{% endif %}">Release Date ◇</a></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for game in games %}
+            <tr>
+                <td><a href="{% url 'game_info' game.pk %}">{{ game.name }}</a></td>
+                <td>{{ game.get_genre_display }}</td>
+                <td>{{ game.release_date|date:"d M Y" }}</td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="3">No games yet</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

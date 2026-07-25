@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block topbar %}{% endblock %}
+{% block content %}
+<div class="auth-wrapper">
+    <div class="register-panel">
+        <form method="post" action="{% url 'register' %}">
+            {% csrf_token %}
+            <div class="row">
+                <div class="field">
+                    <label>First Name</label>
+                    {{ register_form.first_name }}
+                    <span class="error">{{ register_form.first_name.errors|first }}</span>
+                </div>
+                <div class="field">
+                    <label>Last Name</label>
+                    {{ register_form.last_name }}
+                    <span class="error">{{ register_form.last_name.errors|first }}</span>
+                </div>
+            </div>
+            <div class="field">
+                <label>Email</label>
+                {{ register_form.email }}
+                <span class="error">{{ register_form.email.errors|first }}</span>
+            </div>
+            <div class="field dob-field">
+                <label>Date Of Birth</label>
+                {{ register_form.date_of_birth }}
+                <span class="error">{{ register_form.date_of_birth.errors|first }}</span>
+            </div>
+            <div class="field">
+                <label>Password</label>
+                {{ register_form.password }}
+                <span class="error">{{ register_form.password.errors|first }}</span>
+            </div>
+            <div class="field">
+                <label>Confirm Password</label>
+                {{ register_form.confirm_password }}
+                <span class="error">{{ register_form.confirm_password.errors|first }}</span>
+            </div>
+            <div class="field avatar-field">
+                <label>upload avatar</label>
+                {{ register_form.avatar_url }}
+            </div>
+            <button type="submit" class="btn-primary">Create Account</button>
+        </form>
+    </div>
+
+    <div class="login-panel">
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <div class="field">
+                <label>Email</label>
+                <input type="email" name="email" required>
+            </div>
+            <div class="field">
+                <label>Password</label>
+                <input type="password" name="password" required>
+                {% if login_error %}<span class="error">{{ login_error }}</span>{% endif %}
+            </div>
+            <button type="submit" class="btn-primary">SignIn</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
